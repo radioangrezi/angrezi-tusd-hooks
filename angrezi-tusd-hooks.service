@@ -3,7 +3,7 @@ Description=Angrezi hooks for tusd upload server
 
 [Service]
 Type=simple
-ExecStart=npm start
+ExecStart=/usr/bin/node index.js --port 3002
 WorkingDirectory=/media/storage/share/upload/
 User=root
 
