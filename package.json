@@ -1,0 +1,24 @@
+{
+  "name": "angrezi-tusd-hooks",
+  "version": "1.0.0",
+  "description": "this is small node server handling hooks coming from tusd.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radioangrezi/angrezi-tusd-hooks.git"
+  },
+  "scripts": {
+    "start": "node index.js --port 3002"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radioangrezi/angrezi-tusd-hooks/issues"
+  },
+  "homepage": "https://github.com/radioangrezi/angrezi-tusd-hooks#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "yargs": "^15.3.1"
+  }
+}
