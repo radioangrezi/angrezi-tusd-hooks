@@ -1,0 +1,15 @@
+[Unit]
+Description=Angrezi hooks for tusd upload server
+
+[Service]
+Type=simple
+ExecStart=npm start
+WorkingDirectory=/media/storage/share/upload/
+User=root
+
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
