@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node index.js --port 3002"
   },
-  "author": "",
+  "author": "Leonard Puhl",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/radioangrezi/angrezi-tusd-hooks/issues"
