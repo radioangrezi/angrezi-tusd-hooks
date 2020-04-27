@@ -8,8 +8,8 @@ const sanatizeFilePath = (unsafeFilePath) => {
   if (!UPLOAD_DIR) throw new Error("UPLOAD_DIR env variable must be set");
   if (!unsafeFilePath) throw new Error("no pathname specified in request");
   const unsafeNormalizedFilePath = path.normalize(unsafeFilePath);
-  if (path.dirname(unsafeNormalizedFilePath) !== UPLOAD_DIR)
-    throw new Error("provided path is outside of its upload directory");
+  if (path.dirname(unsafeNormalizedFilePath) !== path.normalize(UPLOAD_DIR))
+    throw new Error(`provided path "${unsafeNormalizedFilePath}" is outside of its upload directory`);
   return unsafeNormalizedFilePath;
 };
 
