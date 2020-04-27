@@ -3,7 +3,7 @@ Description=tus protocol file server
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/tusd -upload-dir=. -behind-proxy -expose-metrics false -hooks-http http://localhost:3002
+ExecStart=/usr/local/bin/tusd -upload-dir=. -behind-proxy -expose-metrics false -hooks-http http://localhost:3002 -port 1080
 WorkingDirectory=/media/storage/share/upload/
 User=root
 
