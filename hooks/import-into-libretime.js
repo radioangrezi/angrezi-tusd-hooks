@@ -64,7 +64,7 @@ module.exports = async () => {
 
   await uploadToLibretime(newFilePath);
 
-  fs.unlink(newFilePath);
+  fs.unlinkSync(newFilePath);
 
   return {
     statusCode: 200,
