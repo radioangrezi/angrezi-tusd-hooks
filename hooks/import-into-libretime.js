@@ -48,7 +48,7 @@ const uploadToLibretime = async (filepath) => {
   });
 };
 
-module.exports = async () => {
+module.exports = async (tusdBody) => {
   // check filepath
   // rename file
   // upload into libretime
