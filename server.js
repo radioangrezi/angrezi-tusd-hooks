@@ -59,6 +59,7 @@ const server = {
           if (!statusCode) return handleBadReturnFromHookError();
           if (statusCode != 200 && !message) return handleBadReturnFromHookError();
         } catch (error) {
+          console.error("Error in Hook: ", error.message)
           return handleHookError(res);
         }
       }));
