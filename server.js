@@ -50,8 +50,8 @@ const server = {
     app.post("/", async (req, res) => {
       const hookName = req.header("Hook-Name");
       const { body } = req;
-      if (!hookName) handleBadRequestError(res);
-      if (!isValidHookName(hookName)) handleBadRequestError(res);
+      if (!hookName) return handleBadRequestError(res);
+      if (!isValidHookName(hookName)) return handleBadRequestError(res);
       const hooks = getFromArrayMap(hookMap, hookName);
       await Promise.all(hooks.map(async (hookFunction) => {
         try {
