@@ -2,8 +2,10 @@ const path = require("path");
 const fs = require("fs");
 const FormData = require("form-data");
 const http = require("http");
+var sanitize = require("sanitize-filename");
 
-const sanatizeFilePath = (unsafeFilePath) => {
+
+const sanitizeFilePath = (unsafeFilePath) => {
   const UPLOAD_DIR = process.env.UPLOAD_DIR;
   if (!UPLOAD_DIR) throw new Error("UPLOAD_DIR env variable must be set");
   if (!unsafeFilePath) throw new Error("no pathname specified in request");
@@ -15,12 +17,12 @@ const sanatizeFilePath = (unsafeFilePath) => {
   return unsafeNormalizedFilePath;
 };
 
-const sanatizeFileName = (unsafeFileName) => {
+const sanitizeFileName = (unsafeFileName) => {
   if (!unsafeFileName) throw new Error("no filename specified in request");
   const extension = path.extname(unsafeFileName);
   if (![".mp3", ".wav", ".ogg"].includes(extension))
     throw new Error(`filetype ${extension} not supported`);
-  return path.basename(unsafeFileName);
+  return sanitize(unsafeFileName);
 };
 
 const uploadToLibretime = async (filepath) => {
@@ -56,10 +58,10 @@ module.exports = async (tusdBody) => {
   // upload into libretime
   const { HTTPRequest, Upload } = tusdBody;
 
-  const currentFilePath = sanatizeFilePath(Upload.Storage.Path);
+  const currentFilePath = sanitizeFilePath(Upload.Storage.Path);
 
   // rename file
-  const fileName = sanatizeFileName(Upload.MetaData.filename);
+  const fileName = sanitizeFileName(Upload.MetaData.filename);
   const newFilePath = path.join(path.dirname(currentFilePath), fileName);
 
   fs.renameSync(currentFilePath, newFilePath);
