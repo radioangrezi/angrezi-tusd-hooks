@@ -62,7 +62,7 @@ module.exports = async (tusdBody) => {
   const fileName = sanatizeFileName(Upload.MetaData.filename);
   const newFilePath = path.join(path.dirname(currentFilePath), fileName);
 
-  fs.renameSync(newFilePath, filePath);
+  fs.renameSync(newFilePath, currentFilePath);
 
   await uploadToLibretime(newFilePath);
 
