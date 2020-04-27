@@ -1,0 +1,15 @@
+[Unit]
+Description=tus protocol file server 
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/tusd -upload-dir=. -behind-proxy -expose-metrics false -hooks-http http://localhost:3002
+WorkingDirectory=/media/storage/share/upload/
+User=root
+
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
