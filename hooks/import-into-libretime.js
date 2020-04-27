@@ -9,7 +9,9 @@ const sanatizeFilePath = (unsafeFilePath) => {
   if (!unsafeFilePath) throw new Error("no pathname specified in request");
   const unsafeNormalizedFilePath = path.normalize(unsafeFilePath);
   if (path.dirname(unsafeNormalizedFilePath) !== path.normalize(UPLOAD_DIR))
-    throw new Error(`provided path "${unsafeNormalizedFilePath}" is outside of its upload directory`);
+    throw new Error(
+      `provided path "${unsafeNormalizedFilePath}" is outside of its upload directory`
+    );
   return unsafeNormalizedFilePath;
 };
 
@@ -57,7 +59,7 @@ module.exports = async (tusdBody) => {
   const currentFilePath = sanatizeFilePath(Upload.Storage.Path);
 
   // rename file
-  const fileName = sanatizeFileName(Upload.Metadata.filename);
+  const fileName = sanatizeFileName(Upload.MetaData.filename);
   const newFilePath = path.join(path.dirname(currentFilePath), fileName);
 
   fs.renameSync(newFilePath, filePath);
