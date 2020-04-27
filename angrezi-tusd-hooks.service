@@ -12,5 +12,8 @@ TimeoutStopSec=10
 Restart=on-failure
 RestartSec=5
 
+User=angrezi
+Group=angrezi
+
 [Install]
 WantedBy=default.target
