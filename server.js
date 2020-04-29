@@ -56,8 +56,8 @@ const server = {
       await Promise.all(hooks.map(async (hookFunction) => {
         try {
           const { statusCode, message } = await hookFunction(body);
-          if (!statusCode) return handleBadReturnFromHookError();
-          if (statusCode != 200 && !message) return handleBadReturnFromHookError();
+          if (!statusCode) return handleBadReturnFromHookError(res);
+          if (statusCode != 200 && !message) return handleBadReturnFromHookError(res);
         } catch (error) {
           console.error("Error in Hook: ", error.message)
           return handleHookError(res);
