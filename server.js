@@ -36,9 +36,23 @@ const getFromArrayMap = (aMap, key) => {
   return arr;
 }
 
-const handleHookError = (res) => res.status(500).send("A hook exited with an error");
-const handleBadReturnFromHookError = (res) => res.status(500).send("A hook returned bad data");
-const handleBadRequestError = (res) => res.status(400).send("Bad request");
+const handleHookError = (res) => {
+  console.log("A hook exited with an error");
+  res.status(500).send("A hook exited with an error");
+}
+const handleBadReturnFromHookError = (res) => {
+  console.log("A hook returned bad data");
+  res.status(500).send("A hook returned bad data");
+}
+const handleBadRequestError = (res) => {
+  console.log("Bad request");
+  res.status(400).send("Bad request");
+}
+
+const handleSuccess = (res) => {
+  console.log("Hook processed successfully");
+  res.status(200).send();
+}
 
 // following spec from https://github.com/tus/tusd/blob/master/docs/hooks.md
 const server = {
@@ -63,7 +77,7 @@ const server = {
           return handleHookError(res);
         }
       }));
-      return res.status(200).send();
+      return handleSuccess();
     });
 
     app.listen(port, "localhost", () => {
