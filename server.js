@@ -56,7 +56,6 @@ const handleHookError = (hid, res, statusCode, message) => {
 }
 
 const handleSuccess = (hid, res) => {
-  console.log(`[Hook: ${hid}] Run successfully`);
   res.status(200).send();
 }
 
