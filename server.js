@@ -47,12 +47,12 @@ const handleBadReturnFromHookError = (hid, res) => {
 }
 const handleBadRequestError = (hid, res) => {
   console.log(`[Hook: ${hid}] Bad request from tusd`);
-  res.status(400).send("Bad request");
+  res.status(500).send("Bad request");
 }
 
-const handleHookError = (hid, res, message) => {
-  console.log(`[Hook: ${hid}] Rejected with error: ${message}`);
-  res.status(400).send("Bad request");
+const handleHookError = (hid, res, statusCode, message) => {
+  console.log(`[Hook: ${hid}] Rejected with error: (${statusCode}) ${message}`);
+  res.status(statusCode).send(message);
 }
 
 const handleSuccess = (hid, res) => {
@@ -79,7 +79,7 @@ const server = {
           const { statusCode, message } = await hookFunction(body);
           if (!statusCode) return handleBadReturnFromHookError(hookIdentifier, res);
           if (statusCode != 200 && !message) return handleBadReturnFromHookError(hookIdentifier, res);
-          if (statusCode != 200) return handleHookError(hookIdentifier, res, message);
+          if (statusCode != 200) return handleHookError(hookIdentifier, res, statusCode, message);
           console.log(`[Hook: ${hookIdentifier}] Run successfully`);
         } catch (error) {
           return handleHookException(hookIdentifier, res, error.message);
