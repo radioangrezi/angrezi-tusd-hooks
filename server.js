@@ -71,13 +71,14 @@ const server = {
       await Promise.all(hooks.map(async ([hookIdentifier, hookFunction]) => {
         try {
           const { statusCode, message } = await hookFunction(body);
-          if (!statusCode) return handleBadReturnFromHookError(res);
-          if (statusCode != 200 && !message) return handleBadReturnFromHookError(res);
+          if (!statusCode) return handleBadReturnFromHookError(hookIdentifier, res);
+          if (statusCode != 200 && !message) return handleBadReturnFromHookError(hookIdentifier, res);
+          console.log(`[Hook: ${hookIdentifier}] Run successfully`);
         } catch (error) {
-          return handleHookError(res, error.message);
+          return handleHookError(hookIdentifier, res, error.message);
         }
       }));
-      return handleSuccess(res);
+      return handleSuccess(hookName, res);
     });
 
     app.listen(port, "localhost", () => {
