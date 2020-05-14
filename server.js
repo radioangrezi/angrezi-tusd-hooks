@@ -73,7 +73,8 @@ const server = {
       if (!hookName) return handleBadRequestError(hookName, res);
       if (!isValidHookName(hookName)) return handleBadRequestError(hookName, res);
       const hooks = getFromArrayMap(hookMap, hookName);
-      await Promise.all(hooks.map(async ([hookIdentifier, hookFunction]) => {
+      for (hook of hooks) {
+        const [hookIdentifier, hookFunction] = hook; 
         try {
           const { statusCode, message } = await hookFunction(body);
           if (!statusCode) return handleBadReturnFromHookError(hookIdentifier, res);
@@ -83,7 +84,7 @@ const server = {
         } catch (error) {
           return handleHookException(hookIdentifier, res, error.message);
         }
-      }));
+      };
       return handleSuccess(hookName, res);
     });
 
