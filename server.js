@@ -37,8 +37,8 @@ const getFromArrayMap = (aMap, key) => {
   return arr;
 }
 
-const handleHookError = (hid, res, message) => {
-  console.log(`[Hook: ${hid}] Exited with error: ${message}`);
+const handleHookException = (hid, res, message) => {
+  console.log(`[Hook: ${hid}] Had unhandled error: ${message}`);
   res.status(500).send("A hook exited with an error");
 }
 const handleBadReturnFromHookError = (hid, res) => {
@@ -47,6 +47,11 @@ const handleBadReturnFromHookError = (hid, res) => {
 }
 const handleBadRequestError = (hid, res) => {
   console.log(`[Hook: ${hid}] Bad request from tusd`);
+  res.status(400).send("Bad request");
+}
+
+const handleHookError = (hid, res, message) => {
+  console.log(`[Hook: ${hid}] Rejected with error: ${message}`);
   res.status(400).send("Bad request");
 }
 
@@ -73,9 +78,10 @@ const server = {
           const { statusCode, message } = await hookFunction(body);
           if (!statusCode) return handleBadReturnFromHookError(hookIdentifier, res);
           if (statusCode != 200 && !message) return handleBadReturnFromHookError(hookIdentifier, res);
+          if (statusCode != 200) return handleHookError(hookIdentifier, res, message);
           console.log(`[Hook: ${hookIdentifier}] Run successfully`);
         } catch (error) {
-          return handleHookError(hookIdentifier, res, error.message);
+          return handleHookException(hookIdentifier, res, error.message);
         }
       }));
       return handleSuccess(hookName, res);
