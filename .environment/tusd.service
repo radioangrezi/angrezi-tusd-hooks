@@ -5,7 +5,6 @@ Description=tus protocol file server
 Type=simple
 ExecStart=/usr/local/bin/tusd -upload-dir="." -behind-proxy -hooks-http "http://localhost:3002" -port 1080
 WorkingDirectory=/media/storage/share/upload/
-User=root
 
 TimeoutStopSec=10
 Restart=on-failure
