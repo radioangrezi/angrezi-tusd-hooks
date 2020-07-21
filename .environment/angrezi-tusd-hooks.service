@@ -4,7 +4,7 @@ Description=Angrezi hooks for tusd upload server
 [Service]
 Type=simple
 EnvironmentFile=/opt/services/angrezi-tusd-hooks/.env
-ExecStart=/usr/bin/node /opt/services/angrezi-tusd-hooks/index.js --port 3002
+ExecStart=/usr/bin/node /opt/services/angrezi-tusd-hooks/run/index.js --port 3002
 WorkingDirectory=/media/storage/share/upload/
 
 TimeoutStopSec=10
