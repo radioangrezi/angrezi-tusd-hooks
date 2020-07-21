@@ -13,7 +13,7 @@ sudo rm -rf $DEPLOY_DEST
 sudo mkdir $DEPLOY_DEST
 
 # copy application files
-sudo cp -r $DEPLOY_FROM/. DEPLOY_DEST
+sudo cp -r $DEPLOY_FROM/. $DEPLOY_DEST
 
 # chown by user
 sudo chown -R $SERVICE_USER:$SERVICE_USER $DEPLOY_DEST
