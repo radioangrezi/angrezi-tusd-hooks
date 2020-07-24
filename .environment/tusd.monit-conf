@@ -1,4 +1,4 @@
-heck process tusd
+check process tusd
         matching "tusd"
         start program = "/usr/sbin/service tusd start"
         stop program = "/usr/sbin/service tusd stop"
