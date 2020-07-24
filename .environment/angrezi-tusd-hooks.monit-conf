@@ -1,0 +1,5 @@
+check process tusd-hooks
+        matching "angrezi-tusd-hooks"
+        start program = "/usr/sbin/service angrezi-tusd-hooks start"
+        stop program = "/usr/sbin/service angrezi-tusd-hooks stop"
+        group radio
