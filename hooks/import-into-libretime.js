@@ -65,12 +65,17 @@ module.exports = async (tusdBody) => {
   const newFilePath = path.join(path.dirname(currentFilePath), fileName);
 
   fs.renameSync(currentFilePath, newFilePath);
+  try {
+    await uploadToLibretime(newFilePath);
+    fs.unlinkSync(newFilePath);
+    return {
+      statusCode: 200,
+    };
+  } catch {
+    console.log("error uploading to libretime");
+    return {
+      statusCode: 500 
+    }
+  }
 
-  await uploadToLibretime(newFilePath);
-
-  fs.unlinkSync(newFilePath);
-
-  return {
-    statusCode: 200,
-  };
 };
