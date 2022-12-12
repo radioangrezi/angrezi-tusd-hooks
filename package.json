@@ -18,7 +18,7 @@
   "homepage": "https://github.com/radioangrezi/angrezi-tusd-hooks#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "form-data": "^3.0.0",
     "sanitize-filename": "^1.6.3",
     "yargs": "^15.3.1"
